@@ -2,8 +2,6 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-// import * as fs from 'fs'; 
-import * as path from 'path';
 import { isUndefined } from 'util';
 
 function createWebviewPanel (context: vscode.ExtensionContext) {
@@ -40,11 +38,8 @@ function getMapContent(place : string, apikey : string) {
     return `
     <!DOCTYPE html>
     <html>
-      <head>
-      </head>
+      <head></head>
       <body>
-        <h3>` + place +`</h3>
-        <!--The div element for the map -->
         <iframe style="width:100%; min-height:500px;" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=`+encodeURI(place)+`&key=`+apikey+`" allowfullscreen></iframe> 
       </body>
     </html>`;
@@ -54,28 +49,14 @@ function getMapContent(place : string, apikey : string) {
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-    // The commandId parameter must match the command field in package.json
-    
-
-    let disposable = vscode.commands.registerCommand('googletools.place', () => {
-        
-
-        // The code you place here will be executed every time your command is executed
-
-        // var options: vscode.InputBoxOptions = {};
-        // options.prompt = "Please fill.";
-        // options.placeHolder = "What is this.";
-
-        // vscode.window.showInputBox(options).then(
-        //     (res) => { 
-        //         vscode.window.showInformationMessage('Result of input: ' + res); 
-        //         vscode.window.createWebviewPanel("type", "test", vscode.ViewColumn.Beside);
-        //     });
-
+    context.subscriptions.push(vscode.commands.registerCommand('googletools.place', () => {
         createWebviewPanel(context);
-        // vscode.window.showInformationMessage('Hello World!');
-    });
-    context.subscriptions.push(disposable);
+    }));
+
+    context.subscriptions.push(vscode.commands.registerCommand('googletools.search', () => {
+        //createWebviewPanel(context);
+    }));
+
 }
 
 // this method is called when your extension is deactivated
