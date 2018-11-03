@@ -59,11 +59,7 @@ function performExtraction(inputDelimiter : string, outputDelimiter : string, co
     if( isUndefined(editor)) {
         return;
     }
-
-    console.log(inputDelimiter);
-    console.log(outputDelimiter);
-    console.log(columnsSelection);
-
+    
     let transformedSelection : number[] = [];
 
     columnsSelection.split(",").forEach((selectedColumn) => {
